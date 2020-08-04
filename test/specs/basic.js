@@ -132,5 +132,38 @@ describe('webdriver.io page', () => {
         browser.pause(4000)
         githubLink.scrollIntoView();
         browser.pause(3000);
+        const input = $('#search_input_react');
+        input.scrollIntoView();
+    })
+
+    xit('Should save screenshot', () => {
+        browser.url('https://webdriver.io/');
+        const githubLink = $('#footer [href="https://github.com/webdriverio/webdriverio"]');
+        githubLink.saveScreenshot('screen.png');
+    })
+
+    xit('Should switch to another window', () => {
+        browser.url('https://google.com');
+        browser.newWindow('https://webdriver.io');
+        browser.pause(2000);
+        browser.switchWindow('google.com');
+        browser.pause(2000);
+        browser.switchWindow('Next-gen browser and mobile automation test framework for Node.js');
+    })
+
+    xit('Should wait until', () => {
+        browser.url('https://webdriver.io');
+        browser.waitUntil(() => {
+            return $('[href="/blog/"]').isDisplayed();
+        }, 5000, 'blog is not displayed');
+    })
+
+    it('Should get HTML for specific elements', () => {
+        browser.url('https://webdriver.io/docs/api.html');
+        var outerHtml = $('.siteNavGroupActive').getHTML();
+        console.log("outerHTML: " + outerHtml);
+
+        var innerHtml = $('.siteNavGroupActive').getHTML(false);
+        console.log("innerHTML: " + innerHtml);
     })
 })
