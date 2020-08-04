@@ -54,7 +54,7 @@ describe('webdriver.io page', () => {
         console.log(location);
 
         const xLocation = logo.getLocation('x');
-        console.log('xLocation: '+ xLocation);
+        console.log('xLocation: ' + xLocation);
     })
 
     xit('should demonstrate getText function', () => {
@@ -62,7 +62,7 @@ describe('webdriver.io page', () => {
         const blogBtn = $('[href="/blog"]');
         console.log("Text for element: " + blogBtn.getText());
     })
-    
+
     xit('should do homework', () => {
         browser.url('https://webdriver.io/');
         const apiBtn = $('[href="/docs/api.html"]');
@@ -105,7 +105,7 @@ describe('webdriver.io page', () => {
         console.log("isBlogDisplayedInViewPort: " + isBlogDisplayedInViewPort);
 
         let isGitHubInViewport = $('[href="https://github.com/webdriverio/webdriverio"]')
-                                    .isDisplayedInViewport();
+            .isDisplayedInViewport();
         console.log("isGitHubInViewport: " + isGitHubInViewport);
     })
 
@@ -126,7 +126,7 @@ describe('webdriver.io page', () => {
         browser.pause(2000);
     })
 
-    it('Should move to the element', () => {
+    xit('Should move to the element', () => {
         browser.url('https://webdriver.io/');
         const githubLink = $('#footer [href="https://github.com/webdriverio/webdriverio"]');
         browser.pause(4000)
@@ -158,12 +158,42 @@ describe('webdriver.io page', () => {
         }, 5000, 'blog is not displayed');
     })
 
-    it('Should get HTML for specific elements', () => {
+    xit('Should get HTML for specific elements', () => {
         browser.url('https://webdriver.io/docs/api.html');
         var outerHtml = $('.siteNavGroupActive').getHTML();
         console.log("outerHTML: " + outerHtml);
 
         var innerHtml = $('.siteNavGroupActive').getHTML(false);
         console.log("innerHTML: " + innerHtml);
+    })
+
+    it('Should do another homework', () => {
+        browser.url('https://webdriver.io/docs/api.html');
+        const link = $('//*[text()="JSONWire protocol"]');
+        let attr = link.getAttribute('href');
+        browser.newWindow(attr);
+        var wikiLink = $('strong a[href="/SeleniumHQ/selenium/wiki"]');
+        console.log("Is link displayed:" + wikiLink.isDisplayed()); //true
+
+        browser.switchWindow('https://webdriver.io/docs/api.html');
+        var title = $('.postHeaderTitle');
+        browser.waitUntil(() => {
+            return title.getText() == "API Docs"
+        }, 5000, 'Element was not displayed');
+        title.saveScreenshot('element.png');
+
+        var twitterLink = $('[href="https://twitter.com/webdriverio"]');
+        console.log("isDisplayed before scroll: " + twitterLink.isDisplayed()); //true
+        console.log("isDisplayedInViewPort before scroll: " + twitterLink.isDisplayedInViewport()); //false
+        twitterLink.scrollIntoView();
+        console.log("isDisplayed after scroll: " + twitterLink.isDisplayed()); //true
+        console.log("isDisplayedInViewPort after scroll: " + twitterLink.isDisplayedInViewport()); //true
+
+        var blogBtn = $('[href="/blog/"]');
+        console.log("Blog button is focused before click: " + blogBtn.isFocused()); //false
+        browser.pause(2000);
+        blogBtn.click();
+        browser.pause(2000);
+        console.log("Blog button is focused after click: " + blogBtn.isFocused()); //false?
     })
 })
