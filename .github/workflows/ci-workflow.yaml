@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-        -uses: actions/checkout@v2
-        -run: npm install webdriverio
-        -run: cd /test; ./node_modules/.bin/wdio wdio.conf.js
+        - uses: actions/checkout@v2
+        - run: npm install webdriverio
+        - run: cd /test; ./node_modules/.bin/wdio wdio.conf.js
