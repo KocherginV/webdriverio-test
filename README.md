@@ -8,5 +8,5 @@ https://webdriver.io/
 
  In order to run tests you can execute following command (make sure you are inside of webdriverio-test folder):
 <code>
-  ./node_modules/.bin/wdio wdio.conf.js
+  npm run test
 </code>
