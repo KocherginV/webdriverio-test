@@ -1,5 +1,6 @@
 const assert = require('assert')
 const mainPage = require('../page/main.page.js')
+const docsPage = require('../page/docs.page.js')
 
 describe('webdriverio page', () => {
     it('should demonstrate addValue command', () => {
@@ -66,6 +67,19 @@ describe('webdriverio page', () => {
         mainPage.getStartedButton.click();
         browser.pause(2000);
         assert(browser.getUrl() == 'https://webdriver.io/docs/gettingstarted.html');
+    })
+
+    it('should click on Docs button on Docs page', () => {
+        browser.url('https://webdriver.io');
+        browser.pause(2000);
+        mainPage.docsNavBarButton.click();
+        browser.pause(2000);
+        docsPage.editButton.click();
+        browser.switchWindow('Sign in to GitHub');
+        expect(docsPage.signInToGithub).toBeDisplayed();
+        assert(docsPage.signInToGithub.getText() == "Sign in to GitHub");
+
+        //verify that tab is opened
     })
 
 })

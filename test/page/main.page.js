@@ -1,3 +1,5 @@
+const basePage = require("./base.page")
+
 class MainPage {
     
     get searchInput() {
