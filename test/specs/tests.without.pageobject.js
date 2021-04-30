@@ -1,4 +1,5 @@
 const assert = require('assert')
+//TODO: because of test site re-design no elements found, hence tests need to be fixed
 
 describe.skip('webdriver.io page', () => {
     xit('should have the right title', () => {
